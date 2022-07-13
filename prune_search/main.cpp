@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <chrono>
 
 std::mt19937 mt(2);
 
@@ -62,15 +63,29 @@ int main() {
 		vec.push_back(i);
 	}
 	std::shuffle(vec.begin(), vec.end(), mt);
-	//print_vec(vec);
-	for (std::size_t i = 0; i < 10000; i++) {
-		auto tmp = min_kth(vec, i);
-		std::cout << i << " " << min_kth(vec, i) << std::endl;
-//		std::cout << i << " " << min_kth_sort(vec, i) << std::endl;
-		if (i != tmp) {
-			break;
+	{
+		auto start = std::chrono::system_clock::now();
+		for (std::size_t i = 0; i < 10000; i++) {
+			auto tmp = min_kth(vec, i);
+			if (i != tmp) {
+				break;
+			}
 		}
+		auto end = std::chrono::system_clock::now();
+		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+		std::cout << "Prune & Search: " << elapsed << " milliseconds." << std::endl;
 	}
-
+	{
+		auto start = std::chrono::system_clock::now();
+		for (std::size_t i = 0; i < 10000; i++) {
+			auto tmp = min_kth_sort(vec, i);
+			if (i != tmp) {
+				break;
+			}
+		}
+		auto end = std::chrono::system_clock::now();
+		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+		std::cout << "std::sort: " << elapsed << " milliseconds." << std::endl;
+	}
 	return 0;
 }
