@@ -14,8 +14,8 @@ int main() {
 	std::shuffle(vec.begin(), vec.end(), mt);
 //	std::cout << vec << std::endl;
 	for (std::size_t i = 0; i < 10000; i++) {
-//		auto tmp = voidhoge::min_kth(vec, i);
-		auto tmp = voidhoge::min_kth_sort(vec, i);
+		auto tmp = voidhoge::min_kth(vec, i);
+//		auto tmp = voidhoge::min_kth_sort(vec, i);
 		std::cout << i << " " << tmp << std::endl;
 		if (i != tmp) {
 			break;

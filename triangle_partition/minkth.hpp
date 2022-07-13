@@ -6,7 +6,7 @@
 #include <vector>
 
 template<typename T>
-std::ostream& print_vec(const std::vector<T>& vec, std::ostream& ost = std::cout);
+std::ostream& print_vec(const std::vector<T>& vec, std::ostream& ost);
 
 template<typename T>
 std::ostream& operator << (std::ostream& ost, const std::vector<T>& vec) {
@@ -62,8 +62,10 @@ int min_kth(std::vector<T> vec, const std::size_t k) {
 	return vec.at(k);
 }
 
+// just for benchmark.
 template<typename T>
 int min_kth_sort(std::vector<T> vec, const std::size_t k) {
+	// Returns the kth element in ascending order via std::sort.
 	std::sort(vec.begin(), vec.end());
 	return vec.at(k);
 }
