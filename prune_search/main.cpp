@@ -41,7 +41,7 @@ int min_kth(std::vector<int> vec, const std::size_t k) {
 	while (left != right) {
 		auto tmp = partition(vec, left, right);
 		if (tmp > k) {
-			right--;
+			right = tmp;
 		} else if (tmp < k) {
 			left = tmp+1;
 		}else {
