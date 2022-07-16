@@ -18,6 +18,6 @@ int main() {
 	voidhoge::triangle tmp(points);
 	auto result = tmp.solve();
 	std::cout << result << std::endl;
-	std::cerr << result << std::endl;
+	std::cerr << "result: " << result << std::endl;
 	return 0;
 }

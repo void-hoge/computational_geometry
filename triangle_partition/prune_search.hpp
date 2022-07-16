@@ -17,7 +17,7 @@ std::ostream& operator << (std::ostream& ost, const std::vector<T>& vec) {
 template<typename T>
 std::ostream& print_vec(const std::vector<T>& vec, std::ostream& ost) {
 	if (vec.size() != 0) {
-		std::cout << "["<< vec.at(0);
+		ost << "["<< vec.at(0);
 		for (std::size_t i = 1; i < vec.size(); i++) {
 			ost << ", " << vec.at(i);
 		}

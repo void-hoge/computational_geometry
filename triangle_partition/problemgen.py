@@ -4,8 +4,6 @@ import random
 
 N = 10
 
-random.seed(a=2)
-
 def main():
     print(N)
     for i in range(N*3):
