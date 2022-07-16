@@ -87,19 +87,6 @@ voidhoge::vec2 voidhoge::triangle::classify_three(std::vector<voidhoge::vec2> ve
 		return vec2();
 	}
 	vec = this->rotate(vec, 0, vec.size(), r);
-	/*
-	for (auto v: this->solved) {
-		v = this->rotate(v, 0, v.size(), r);
-	}
-	if (r == 1) {
-		std::swap(this->solved.at(0), this->solved.at(1));
-		std::swap(this->solved.at(1), this->solved.at(2));
-	}else if (r == 2) {
-		std::swap(this->solved.at(0), this->solved.at(1));
-		std::swap(this->solved.at(0), this->solved.at(2));
-	}
-	*/
-
 	for (std::size_t i = 0; i < 3; i++) {
 		for (std::size_t j = 0; j < 2; j++) {
 			if (this->check_three(vec, r)) {
@@ -117,22 +104,6 @@ voidhoge::vec2 voidhoge::triangle::classify_three(std::vector<voidhoge::vec2> ve
 
 	vec = this->rotate(vec, 0, vec.size(), r);
 	vec = this->rotate(vec, 0, vec.size(), r);
-	/*
-	for (auto v: this->solved) {
-		v = this->rotate(v, 0, v.size(), r);
-	}
-	for (auto v: this->solved) {
-		v = this->rotate(v, 0, v.size(), r);
-	}
-	if (r == 1) {
-		std::swap(this->solved.at(1), this->solved.at(2));
-		std::swap(this->solved.at(0), this->solved.at(1));
-
-	}else if (r == 2) {
-		std::swap(this->solved.at(0), this->solved.at(2));
-		std::swap(this->solved.at(0), this->solved.at(1));
-	}
-	*/
 	return vec2();
 }
 
@@ -150,10 +121,6 @@ bool voidhoge::triangle::check_three(const std::vector<voidhoge::vec2> vec, cons
 		return false;
 	}
 	is = is.rotate(r).rotate(r);
-//	std::cout << is << std::endl;
-	std::cerr << this->solved.at(0) << std::endl;
-	std::cerr << this->solved.at(2) << std::endl;
-	std::cerr << is << std::endl;
 	if (!check_all(is, this->solved.at(2), this->solved.at(1), r)) {
 		return false;
 	}
@@ -177,11 +144,9 @@ bool voidhoge::triangle::check_all(const vec2 is, const std::vector<vec2>& vec0,
 	}
 	for (std::size_t i = 0; i < vec0.size(); i++) {
 		if (vec0.at(i) < is) {
-			std::cerr << "0 " << i << ": " << vec0.at(i) << ", " << is.rotate(r).rotate(r) << std::endl;
 			return false;
 		}
 		if (is < vec1.at(i)) {
-			std::cerr << "1 " << i << ": " << vec0.at(i) << ", " << is.rotate(r).rotate(r) << std::endl;
 			return false;
 		}
 	}
@@ -190,7 +155,6 @@ bool voidhoge::triangle::check_all(const vec2 is, const std::vector<vec2>& vec0,
 
 voidhoge::vec2 voidhoge::triangle::solve() {
 	while (this->points.size() > 3) {
-		std::cerr << "points: " << this->points.size() << std::endl;
 		for (std::size_t i = 0; i < 3; i++) {
 			this->classify_half(this->points, i);
 		}
