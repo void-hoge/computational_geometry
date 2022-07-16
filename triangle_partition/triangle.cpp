@@ -121,24 +121,24 @@ bool voidhoge::triangle::check_three(const std::vector<voidhoge::vec2> vec, cons
 		return false;
 	}
 	is = is.rotate(r).rotate(r);
-	if (!check_all(is, this->solved.at(2), this->solved.at(1), r)) {
+	if (!check_all(is, this->solved.at(2), this->solved.at(1))) {
 		return false;
 	}
 	if (!check_all(is.rotate(1),
 				   this->rotate(this->solved.at(0), 0, this->solved.at(0).size(), 1),
-				   this->rotate(this->solved.at(2), 0, this->solved.at(2).size(), 1), 1)) {
+				   this->rotate(this->solved.at(2), 0, this->solved.at(2).size(), 1))) {
 		return false;
 	}
 
 	if (!check_all(is.rotate(2),
 				   this->rotate(this->solved.at(1), 0, this->solved.at(0).size(), 2),
-				   this->rotate(this->solved.at(0), 0, this->solved.at(1).size(), 2), 2)) {
+				   this->rotate(this->solved.at(0), 0, this->solved.at(1).size(), 2))) {
 		return false;
 	}
 	return true;
 }
 
-bool voidhoge::triangle::check_all(const vec2 is, const std::vector<vec2>& vec0, const std::vector<vec2>& vec1, const std::size_t r) {
+bool voidhoge::triangle::check_all(const vec2 is, const std::vector<vec2>& vec0, const std::vector<vec2>& vec1) {
 	if (vec0.size() != vec1.size()) {
 		return false;
 	}

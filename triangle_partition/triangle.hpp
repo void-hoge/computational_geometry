@@ -90,7 +90,7 @@ public:
 	void classify_half(std::vector<vec2>& vec, const std::size_t r);
 	vec2 classify_three(std::vector<vec2> vec, const std::size_t r);
 	bool check_three(const std::vector<vec2> vec, const std::size_t r);
-	bool check_all(const vec2 is, const std::vector<vec2>& vec0, const std::vector<vec2>& vec1, const std::size_t r);
+	bool check_all(const vec2 is, const std::vector<vec2>& vec0, const std::vector<vec2>& vec1);
 	vec2 solve();
 
 	std::vector<vec2> rotate(std::vector<vec2> vec, const std::size_t left, const std::size_t right, const std::size_t r=0) {
