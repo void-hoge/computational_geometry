@@ -2,9 +2,9 @@
 
 import random
 
-N = 3
+N = 10
 
-random.seed(a=5)
+random.seed(a=2)
 
 def main():
     print(N)

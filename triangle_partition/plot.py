@@ -12,9 +12,38 @@ def main():
     for _ in range(n*3):
         x, y = tuple(map(float, input().split()))
         plt.plot(x, y, marker='.', markersize=10, color='red')
-    sx, sy = tuple(map(float, input().split()))
-    plt.plot([0,sx], [0,sy], color='black')
-    plt.show()
 
+    n = int(input())
+    for _ in range(n):
+        x, y = tuple(map(float, input().split()))
+        plt.plot(x, y, marker='.', markersize=10, color='blue')
+
+    n = int(input())
+    for _ in range(n):
+        x, y = tuple(map(float, input().split()))
+        plt.plot(x, y, marker='.', markersize=10, color='green')
+
+    n = int(input())
+    for _ in range(n):
+        x, y = tuple(map(float, input().split()))
+        plt.plot(x, y, marker='.', markersize=10, color='yellow')
+
+    x, y = tuple(map(float, input().split()))
+    plt.plot([0,x], [0,y], color='red')
+    plt.plot([0,x], [1,y], color='red')
+    plt.plot([1,x], [0,y], color='red')
+
+    x, y = tuple(map(float, input().split()))
+    plt.plot([0,x], [0,y], color='blue')
+    plt.plot([0,x], [1,y], color='blue')
+    plt.plot([1,x], [0,y], color='blue')
+
+    x, y = tuple(map(float, input().split()))
+    plt.plot([0,x], [0,y], color='green')
+    plt.plot([0,x], [1,y], color='green')
+    plt.plot([1,x], [0,y], color='green')
+
+    plt.show()
+    
 if __name__ == '__main__':
     main()

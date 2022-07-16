@@ -1,4 +1,3 @@
-#include "prune_search.hpp"
 #include "triangle.hpp"
 
 #include <iostream>
@@ -12,12 +11,13 @@ int main() {
 	for (std::size_t i = 0; i < n*3; i++) {
 		double x, y;
 		std::cin >> x >> y;
-		points.push_back(voidhoge::vec2(x, y));
-		std::cout << x << " " << y << std::endl;
+		auto p = voidhoge::vec2(x, y);
+		points.push_back(p);
+		std::cout << p << std::endl;
 	}
 	voidhoge::triangle tmp(points);
-	std::cerr << (n*3)/2 << std::endl;
-	auto split = tmp.split_k((n*3)/2);
-	std::cout << split.x << " " << split.y << std::endl;
+	auto result = tmp.solve();
+	std::cout << result << std::endl;
+	std::cerr << result << std::endl;
 	return 0;
 }

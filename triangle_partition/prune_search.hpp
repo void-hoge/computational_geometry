@@ -1,9 +1,9 @@
-#ifndef PRUNE_SEARCH_HPP
-#define PRUNE_SEARCH_HPP
+#pragma once
 
 #include <iostream>
 #include <ostream>
 #include <vector>
+#include <algorithm>
 
 template<typename T>
 std::ostream& print_vec(const std::vector<T>& vec, std::ostream& ost);
@@ -31,7 +31,7 @@ namespace voidhoge{
 template<typename T>
 std::size_t partition(std::vector<T>& vec, const std::size_t left, const std::size_t right) {
 	// Gather the elements blow pivot on the left side, and returns the index of the pivot after the operation.
-	// pivot is the leftmost element.
+	// The pivot is the leftmost element.
 	auto pivot = vec.at(left);
 	std::swap(vec.at(left), vec.at(right-1));
 	auto tmp = left;
@@ -46,20 +46,20 @@ std::size_t partition(std::vector<T>& vec, const std::size_t left, const std::si
 }
 
 template<typename T>
-T k_th_smallest(std::vector<T> vec, const std::size_t k) {
-	// Returns the kth element in ascending order.
-	std::size_t left = 0, right = vec.size();
+std::vector<T> k_th_smallest(std::vector<T> vec, const std::size_t k, std::size_t left, std::size_t right) {
+	// Returns a vector with the k th elements on the left in ascending order.
+	const auto left_ = left;
 	while (left != right) {
 		auto tmp = partition(vec, left, right);
-		if (tmp > k) {
+		if (tmp > k+left_) {
 			right = tmp;
-		} else if (tmp < k) {
+		} else if (tmp < k+left_) {
 			left = tmp+1;
 		}else {
 			break;
 		}
 	}
-	return vec.at(k);
+	return vec;
 }
 
 // just for benchmark.
@@ -71,5 +71,3 @@ T k_th_smallest_sort(std::vector<T> vec, const std::size_t k) {
 }
 
 } // namespace voidhoge
-
-#endif // PRUNE_SEARCH
