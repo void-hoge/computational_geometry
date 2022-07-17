@@ -1,6 +1,6 @@
 CC = g++
 STD = -std=c++20
-RELEASE = -O3 -mtune=native -march=native -flto
+RELEASE = -O2 -mtune=native -march=native -flto
 PROG = triangle
 
 $(PROG): main.o triangle.o

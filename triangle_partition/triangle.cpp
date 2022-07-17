@@ -13,18 +13,6 @@ bool operator == (const voidhoge::vec2& a, const voidhoge::vec2& b) {
 	return a.x() == b.x() && a.y() == b.y();
 }
 
-voidhoge::vec2 operator * (const voidhoge::vec2& a, const double scalar) {
-	return voidhoge::vec2(a.x()*scalar, a.y()*scalar, a.flag());
-}
-
-voidhoge::vec2 operator / (const voidhoge::vec2& a, const double scalar) {
-	return voidhoge::vec2(a.x()/scalar, a.y()/scalar, a.flag());
-}
-
-voidhoge::vec2 operator + (const voidhoge::vec2& a, const voidhoge::vec2& b) {
-	return voidhoge::vec2(a.x()+b.x(), a.y()+b.y());
-}
-
 std::ostream& operator << (std::ostream& ost, const voidhoge::vec2& v) {
 	v.dump(ost);
 	return ost;

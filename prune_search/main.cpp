@@ -5,24 +5,26 @@
 #include <vector>
 #include <random>
 #include <chrono>
+#include <ostream>
 
 std::mt19937 mt(2);
 
 template<typename T>
-void print_vec(std::vector<T> vec) {
+void print_vec(std::vector<T> vec, std::ostream& ost) {
 	// print the single dimention std::vector<T> VEC.
 	if (vec.size() != 0) {
-		std::cout << "["<< vec.at(0);
+		ost << "["<< vec.at(0);
 		for (std::size_t i = 1; i < vec.size(); i++) {
-			std::cout << ", " << vec.at(i);
+			ost << ", " << vec.at(i);
 		}
-		std::cout << "]" << std::endl;
+		ost << "]" << std::endl;
 	}
 }
 
-std::size_t partition(std::vector<int>& vec, const std::size_t left, const std::size_t right) {
+template<typename T>
+std::size_t partition(std::vector<T>& vec, const std::size_t left, const std::size_t right) {
 	// Gather the elements blow pivot on the left side, and returns the index of the pivot after the operation.
-	// pivot is the leftmost element.
+	// The pivot is the leftmost element.
 	auto pivot = vec.at(left);
 	std::swap(vec.at(left), vec.at(right-1));
 	auto tmp = left;
@@ -36,14 +38,15 @@ std::size_t partition(std::vector<int>& vec, const std::size_t left, const std::
 	return tmp;
 }
 
-int min_kth(std::vector<int> vec, const std::size_t k) {
+template<typename T>
+T k_th_smallest(std::vector<T> vec, const std::size_t k, std::size_t left, std::size_t right) {
 	// Returns the kth element in ascending order.
-	std::size_t left = 0, right = vec.size();
+	const auto left_ = left;
 	while (left != right) {
 		auto tmp = partition(vec, left, right);
-		if (tmp > k) {
+		if (tmp > k+left_) {
 			right = tmp;
-		} else if (tmp < k) {
+		} else if (tmp < k+left_) {
 			left = tmp+1;
 		}else {
 			break;
@@ -52,40 +55,42 @@ int min_kth(std::vector<int> vec, const std::size_t k) {
 	return vec.at(k);
 }
 
-int min_kth_sort(std::vector<int> vec, const std::size_t k) {
-	std::sort(vec.begin(), vec.end());
+template<typename T>
+T k_th_smallest_sort(std::vector<T> vec, const std::size_t k, std::size_t left, std::size_t right) {
+	std::sort(vec.begin()+left, vec.begin()+right);
 	return vec.at(k);
 }
 
 int main() {
 	std::vector<int> vec;
-	for (int i = 0; i < 10000; i++) {
+	const std::size_t n = 10000;
+	for (std::size_t i = 0; i < n; i++) {
 		vec.push_back(i);
 	}
 	std::shuffle(vec.begin(), vec.end(), mt);
 	{
 		auto start = std::chrono::system_clock::now();
-		for (std::size_t i = 0; i < 10000; i++) {
-			auto tmp = min_kth(vec, i);
+		for (std::size_t i = 0; i < n; i++) {
+			auto tmp = k_th_smallest(vec, i, 0, vec.size());
 			if (i != tmp) {
-				break;
+				throw std::runtime_error("k_th_smallest: wrong output");
 			}
 		}
 		auto end = std::chrono::system_clock::now();
-		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
-		std::cout << "Prune & Search: " << elapsed << " milliseconds." << std::endl;
+		auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end-start).count();
+		std::cout << "Prune & Search: " << elapsed << " microseconds" << std::endl;
 	}
 	{
 		auto start = std::chrono::system_clock::now();
-		for (std::size_t i = 0; i < 10000; i++) {
-			auto tmp = min_kth_sort(vec, i);
+		for (std::size_t i = 0; i < n; i++) {
+			auto tmp = k_th_smallest_sort(vec, i, 0, vec.size());
 			if (i != tmp) {
-				break;
+				throw std::runtime_error("k_th_smallest_sort: wrong output");
 			}
 		}
 		auto end = std::chrono::system_clock::now();
-		auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
-		std::cout << "std::sort: " << elapsed << " milliseconds." << std::endl;
+		auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end-start).count();
+		std::cout << "std::sort: " << elapsed << " microseconds" << std::endl;
 	}
 	return 0;
 }
