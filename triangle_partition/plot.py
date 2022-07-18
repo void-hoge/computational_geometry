@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# 27019578
+# Mugi Noda
+
 import matplotlib.pyplot as plt
 
 def main():

@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+# 27019578
+# Mugi Noda
+
 import random
 
-N = 10
+N = 8
 
 def main():
     print(N)

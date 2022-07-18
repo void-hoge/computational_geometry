@@ -1,3 +1,6 @@
+// 27019578
+// Mugi Noda
+
 #include "triangle.hpp"
 
 #include <iostream>

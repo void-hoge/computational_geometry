@@ -1,3 +1,6 @@
+# 27019578
+# Mugi Noda
+
 CC = g++
 STD = -std=c++20
 RELEASE = -O2 -mtune=native -march=native -flto
