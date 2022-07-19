@@ -110,3 +110,7 @@ vec2 getintersection(const vec2 a, const vec2 b);
 } // namespace voidhoge
 
 std::ostream& operator << (std::ostream& ost, const voidhoge::vec2& v);
+
+bool operator < (const voidhoge::vec2& a, const voidhoge::vec2& b);
+
+bool operator == (const voidhoge::vec2& a, const voidhoge::vec2& b);
