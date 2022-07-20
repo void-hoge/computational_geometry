@@ -71,13 +71,11 @@ public:
 
 class triangle {
 private:
-	std::mt19937 mt;
 	const std::size_t n;
 	std::vector<vec2> points;
 	std::array<std::vector<vec2>, 3> solved;
 public:
 	triangle(const std::vector<vec2> _points): points(_points), n(_points.size()/3) {
-		this->mt = std::mt19937(0);
 		if ((_points.size()%3) != 0) {
 			throw std::runtime_error("The number of input points must be a multiple of 3.");
 		}
